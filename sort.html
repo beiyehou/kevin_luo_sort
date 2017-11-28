@@ -1,0 +1,202 @@
+<html>
+    <head><title>Kevin Luo</title></head>
+    <body>
+        <script>
+            let count = 0;
+            let originalArr = [1,5,8,9,10,45,76,33,23,88];
+            document.write("Bubble Sort:<br/>" + JSON.stringify(originalArr) + "<br/>");
+            for (let i = 0; i < originalArr.length-1; i++) {
+                for (let j = originalArr.length; j > i; j--) {
+                    if (originalArr[j] < originalArr[i]) {
+                        let temp = originalArr[j];
+                        originalArr[j] = originalArr[i];
+                        originalArr[i] = temp;
+                        count++;
+                    }
+                }
+            }
+            document.write("Result:<br/>" + JSON.stringify(originalArr) + "<br/>" + "交换次数:" + count + "<br/>");
+        </script>
+        <script>
+            originalArr = [1,5,8,9,10,45,76,33,23,88];
+            count = 0;
+            document.write("<br/>SelctionSort:<br/>" + JSON.stringify(originalArr) + "<br/>");
+            for (let i = 0; i < originalArr.length-1; i++) {
+                let tempBig = originalArr[i];
+                for (let j= i + 1; j < originalArr.length; j++) {
+                    if (originalArr[j] > tempBig) {
+                        tempBig = originalArr[j];
+                        originalArr[j] = originalArr[i];
+                        originalArr[i] = tempBig;
+                        count++;
+                    }
+                }
+            }
+            document.write("Result:<br/>" + JSON.stringify(originalArr) + "<br/>" + "交换次数:" + count + "<br/>");
+        </script>
+        <script>
+            originalArr = [1,5,8,9,10,45,76,33,23,88];
+            count = 0;
+            document.write("<br/>Insertion Sort:<br/>" + JSON.stringify(originalArr) + "<br/>");
+            for (let i = 0;i < originalArr.length-1;i++) {
+                for (let j = i + 1; j > 0; j--) {
+                    if (originalArr[j] < originalArr[j-1]) {
+                        let temp = originalArr[j];
+                        originalArr[j] = originalArr[i];
+                        originalArr[i] = temp;
+                        count++;
+                    } else {
+                        break;
+                    }
+                }
+            }
+            document.write("Result:<br/>" + JSON.stringify(originalArr) + "<br/>" + "交换次数:" + count + "<br/>");
+        </script>
+        <script>
+            originalArr = [1,5,8,9,10,45,76,33,23,88];
+            let originalLength = originalArr.length;
+            document.write("<br/>Shell Sort:<br/>" + JSON.stringify(originalArr) + "<br/>");
+            document.write("数组长:" + originalLength + "<br/>");
+            count = 0;
+            for (let delta = Math.floor(originalLength/2); delta >= 1; delta = Math.floor(delta/2)) {
+                for (let n = 0; n < delta; n++) {
+                    for (let i = n; i < originalLength; i += delta) {
+                        for (let j = i + delta; j > n; j -= delta ) {
+                            if (originalArr[j] < originalArr[j-delta]) {
+                                let temp = originalArr[j-delta];
+                                originalArr[j-delta] = originalArr[j];
+                                originalArr[j] = temp;
+                                count++;
+                            } else {
+                                break;
+                            }
+                        }
+                    }
+                }
+                document.write("步长:" + delta + "<br/>结果:" + JSON.stringify(originalArr) + "<br/>");
+            }
+            document.write("Result:<br/>" + JSON.stringify(originalArr) + "<br/>" + "计算次数:" + count + "<br/>");
+        </script>
+        <script>
+            originalArr = [1,5,8,9,10,45,76,33,23,88];
+            count = 0;
+            document.write("<br/>Quick Sort:<br/>" + JSON.stringify(originalArr) + "<br/>");
+            function quickSort(sortArr, startIndex, endIndex) {
+                /** The condition for breaking the call. **/
+                if (startIndex >= endIndex) {
+                    return;
+                }
+                let leftIndex = startIndex;
+                let rightIndex = endIndex;
+                let divideValue = sortArr[leftIndex];
+                while(leftIndex < rightIndex) {
+                    /** Searching from right to left. **/
+                    while(leftIndex < rightIndex && sortArr[rightIndex] > divideValue) {
+                        rightIndex--;
+                    }
+                    if (leftIndex < rightIndex) {
+                        sortArr[leftIndex] = sortArr[rightIndex];
+                        leftIndex++;count++;
+                    }
+
+                    /** Searching from left to right. **/
+                    while(leftIndex < rightIndex && sortArr[leftIndex] <= divideValue) {
+                        leftIndex++;
+                    }
+                    if (leftIndex < rightIndex) {
+                        sortArr[rightIndex] = sortArr[leftIndex];
+                        rightIndex--;count++;
+                    }
+                }
+
+                sortArr[leftIndex] = divideValue;
+                quickSort(sortArr, startIndex, leftIndex-1);
+                quickSort(sortArr, leftIndex + 1, endIndex);
+            }
+            quickSort(originalArr,0,originalArr.length-1);
+            document.write("Result:<br/>" + JSON.stringify(originalArr) + "<br/>" + "计算次数:" + count + "<br/>");
+        </script>
+        <script>
+            originalArr = [1,5,8,9,10,45,76,33,23,88];
+            count = 0;
+            document.write("<br/>Merge Sort:<br/>" + JSON.stringify(originalArr) + "<br/>");
+            function mergeSort(sortArr, startIndex, endIndex) {
+                if (startIndex < endIndex) {
+                    let middleIndex = Math.floor((startIndex + endIndex)/2);
+                    mergeSort(sortArr, startIndex, middleIndex);
+                    mergeSort(sortArr, middleIndex + 1, endIndex);
+                    mergeTool(sortArr, startIndex, middleIndex, endIndex);
+                }
+            }
+            function mergeTool(sortArr, startIndex, middleIndex, endIndex) {
+                let tempArr = [], tempIndex = 0;
+                let leftStartIndex = startIndex;
+                let rightStartIndex = middleIndex+1;
+                while(leftStartIndex <= middleIndex && rightStartIndex <= endIndex) {
+                    if (sortArr[leftStartIndex] < sortArr[rightStartIndex]) {
+                        tempArr[tempIndex] = sortArr[leftStartIndex];
+                        leftStartIndex++;
+                    } else {
+                        tempArr[tempIndex] = sortArr[rightStartIndex];
+                        rightStartIndex++;
+                    }
+                    count++;
+                    tempIndex++;
+                }
+
+                while(leftStartIndex <= middleIndex) {
+                    tempArr[tempIndex] = sortArr[leftStartIndex];
+                    leftStartIndex++;
+                    count++;
+                    tempIndex++;
+                }
+
+                while(rightStartIndex <= endIndex) {
+                    tempArr[tempIndex] = sortArr[rightStartIndex];
+                    rightStartIndex++;
+                    count++;
+                    tempIndex++;
+                }
+                for (let key = 0; key < tempIndex; key++) {
+                    sortArr[startIndex + key] = tempArr[key];
+                }
+            }
+            mergeSort(originalArr, 0, originalArr.length-1);
+            document.write("Result:<br/>" + JSON.stringify(originalArr) + "<br/>" + "计算次数:" + count + "<br/>");
+        </script>
+        <script>
+            originalArr = [1,5,8,9,10,45,76,33,23,88,2,3,2];
+            count = 0;
+            document.write("<br/>Radix Sort:<br/>" + JSON.stringify(originalArr) + "<br/>");
+            let tempStoreArr = [];
+            let sortedArr = originalArr;
+            let maxValue = Math.max(...originalArr);
+            let maxValueStr = maxValue.toString().split("");
+            maxValueStr.forEach(function(currentChar, index){
+                tempStoreArr = [];
+                sortedArr.forEach(function(currentItem) {
+                    let currentItemStr = currentItem.toString();
+                    let insertPosIndex = 0;
+                    let currentCharPosIndex = currentItemStr.length - 1 - index;
+                    if (currentItemStr[currentCharPosIndex]) {
+                        insertPosIndex = parseInt(currentItemStr[currentCharPosIndex]);
+                    } else {
+                        insertPosIndex = 0;
+                    }
+                    if (tempStoreArr[insertPosIndex]) {
+                        tempStoreArr[insertPosIndex] = tempStoreArr[insertPosIndex].concat([currentItem]);
+                    } else {
+                        tempStoreArr[insertPosIndex] = [currentItem];
+                    }
+                });
+                sortedArr = [];
+                tempStoreArr.forEach(function(currentStoreItem) {
+                    if (currentStoreItem) {
+                        sortedArr= sortedArr.concat(currentStoreItem);
+                    }
+                });
+            });
+            document.write("Result:<br/>" + JSON.stringify(sortedArr) + "<br/>" + "计算次数:" + count + "<br/>");
+        </script>
+    </body>
+</html>

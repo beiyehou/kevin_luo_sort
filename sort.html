@@ -6,7 +6,7 @@
             let originalArr = [1,5,8,9,10,45,76,33,23,88];
             document.write("Bubble Sort:<br/>" + JSON.stringify(originalArr) + "<br/>");
             for (let i = 0; i < originalArr.length-1; i++) {
-                for (let j = originalArr.length; j > i; j--) {
+                for (let j = originalArr.length-1; j > i; j--) {
                     if (originalArr[j] < originalArr[i]) {
                         let temp = originalArr[j];
                         originalArr[j] = originalArr[i];

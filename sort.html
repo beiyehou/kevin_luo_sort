@@ -160,6 +160,7 @@
                 for (let key = 0; key < tempIndex; key++) {
                     sortArr[startIndex + key] = tempArr[key];
                 }
+                //sortArr.splice(startIndex, tempArr.length, ...tempArr);
             }
             mergeSort(originalArr, 0, originalArr.length-1);
             document.write("Result:<br/>" + JSON.stringify(originalArr) + "<br/>" + "计算次数:" + count + "<br/>");

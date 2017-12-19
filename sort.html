@@ -42,8 +42,8 @@
                 for (let j = i + 1; j > 0; j--) {
                     if (originalArr[j] < originalArr[j-1]) {
                         let temp = originalArr[j];
-                        originalArr[j] = originalArr[i];
-                        originalArr[i] = temp;
+                        originalArr[j] = originalArr[j-1];
+                        originalArr[j-1] = temp;
                         count++;
                     } else {
                         break;

@@ -23,7 +23,7 @@
             document.write("<br/>SelctionSort:<br/>" + JSON.stringify(originalArr) + "<br/>");
             for (let i = 0; i < originalArr.length-1; i++) {
                 let tempBig = originalArr[i];
-                for (let j= i + 1; j < originalArr.length; j++) {
+                for (let j= i + 1; j < originalArr.length-1; j++) {
                     if (originalArr[j] > tempBig) {
                         tempBig = originalArr[j];
                         originalArr[j] = originalArr[i];

@@ -7,10 +7,10 @@
             document.write("Bubble Sort:<br/>" + JSON.stringify(originalArr) + "<br/>");
             for (let i = 0; i < originalArr.length-1; i++) {
                 for (let j = originalArr.length-1; j > i; j--) {
-                    if (originalArr[j] < originalArr[i]) {
-                        let temp = originalArr[j];
-                        originalArr[j] = originalArr[i];
-                        originalArr[i] = temp;
+                    if (originalArr[j] < originalArr[j-1]) {
+                        let temp = originalArr[j-1];
+                        originalArr[j-1] = originalArr[j];
+                        originalArr[j] = temp;
                         count++;
                     }
                 }
